@@ -1,10 +1,13 @@
 //Adonay Galan
 
 #include <iostream>
+#include <iostream>
 #include <fstream>
+#include <vector>
 #include <stdio.h>
-#include "libraries/bitmap.h"
-
+#include <stdlib.h>
+#include <time.h>
+#include <sstream>
 using namespace std;
 
 int main()
@@ -48,7 +51,43 @@ int main()
 
   cout << "\"" << paletteFile << "\"" << " was created successfully." << endl;
 
-  //Attempting to open the file with the given name
+  //RGB colorcodes
+  int numColor = numOfColors;
+  int generatedNum;
+  int count = 0;
+  vector <int> generatedNumHolder;
+  vector <string> colorCode;
+
+  cout << "num of color (2+)" << endl;
+  cin >> numColor;
+
+  srand(time(0));
+  for(int i = 0; i < 3 * numColor; i++){
+    generatedNum = (rand()%256) + 1;
+    generatedNumHolder.push_back(generatedNum);
+  }
+
+  for(int i = 0; i < numColor; i++){
+    int value1 = generatedNumHolder[0 + (3 * count)];
+    int value2 = generatedNumHolder[1+ (3 * count)];
+    int value3 = generatedNumHolder[2+ (3 * count)];
+
+    stringstream rgb1, rgb2, rgb3;
+    string all, a, b, c;
+
+    rgb1 << value3;
+    rgb1 >> a;
+    rgb2 << value2;
+    rgb2 >> b;
+    rgb3 << value1;
+    rgb3 >> c;
+
+    all = "rgb(" + a + "," + b + "," + c + ")";
+    colorCode.push_back(all);
+    count ++;
+  }
+
+  /*//Attempting to open the file with the given name
   ofstream dataFile;
   dataFile.open(paletteFile, ios:: out);   
 
@@ -56,7 +95,9 @@ int main()
   dataFile << "Number of distint color values: "
   << numOfColors << endl;
 
-  dataFile.close();
+  dataFile.close();*/
+
+
 }
 
 else{
