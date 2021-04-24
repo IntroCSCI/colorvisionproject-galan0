@@ -15,9 +15,9 @@ void createSVG(int neededColors, string title,
      vector<string>);
 
 //Pass by Refernce
-void colorCode(vector<int>&, int neededColors);
+void randomGeneratedValues(vector<int>&, int neededColors);
 //Pass by Value and Refernce
-void sequence(vector<int>, vector<string>&);
+void rgbForSvg(vector<int>, vector<string>&);
 
 int main()
 {
@@ -64,8 +64,8 @@ int main()
   vector<string> svgColorCode;
 
   //Call to Functions
-  colorCode(rgbCodeValues, numOfColors);
-  sequence(rgbCodeValues, svgColorCode);
+  randomGeneratedValues(rgbCodeValues, numOfColors);
+  rgbForSvg(rgbCodeValues, svgColorCode);
 
   createSVG(numOfColors, paletteFile, svgColorCode);
 
@@ -131,7 +131,7 @@ vector<string> svgCodeFormat){
 
 //FUNCTION #2
 //Random Generator creates the three values for the RGB code
-void colorCode(vector<int>& storeValues, int neededColors){
+void randomGeneratedValues(vector<int>& storeValues, int neededColors){
   int randomNumber;
 
   /*Creates 3 random numbers from 0-255 for each color 
@@ -147,7 +147,7 @@ void colorCode(vector<int>& storeValues, int neededColors){
 //FUNCTION #3
 /*Combines the RGB values from the random generator into a 
 single string*/
-void sequence(vector<int> storeValues, vector<string>& 
+void rgbForSvg(vector<int> storeValues, vector<string>& 
      rgbCodes){
   int count = 0;
 

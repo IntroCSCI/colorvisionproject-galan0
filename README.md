@@ -4,11 +4,13 @@
 
 The program will prompt the user for a number of colors needed for their palette and a name for the file that values will be stored in.
 
-Depending on the the amount that was chosen a set of colors values will be added into the the contents of the file as well.
+Depending on the the amount that was chosen a set of colors values will be added into the contents of the file as well.
 
 ### v0.2 Updates
 
-*Coming soon*
+This version of the program creates RGB color codes for each of the user's needed colors. These values were chosen with the help of a random number generator. This ensures that the palette consists of distinct colors.
+
+The user will be able to see the amount of colors they chose. As well as, the color palette created in an svg file titled by the user.
 
 ### v1.0 Updates
 
@@ -32,10 +34,10 @@ Here is an example of the program running:
 
 ```
 Enter the amount of colors needed (2+): 
-4
+8
 Enter a name for the palette file: 
-testing
-"testing.txt" was created successfully.
+myColors
+"myColors.svg" was created successfully.
 ```
 
 ## C++ Guide
@@ -46,7 +48,18 @@ testing
 * `size_t position;` 
 * `string fileN;` *stores the name of the file given by the user*
 * `string paletteFile;` *stores the complete file name*
-* `ofstream dataFile;` *used to create files and write information*
+* `ofstream newFile(title);;` *used to create svg file and store colors*
+* `int x = 50;` *determines the shape's position on x axis*
+* `int y = 50;` *determines the shape's position on y axis*
+* `int width = 100;` *width of square*
+* `int height = 100;` *length of square*
+* `int distinctColors;` *stores the amount of colors user needed*
+* `int count = 0;` *keeps track of the amount of loops*
+* `int ycolumn = 0;`*alters the y axis for the shape's position on y axis
+* `int randomNumber;` *stores number from the random generator* 
+* `stringstream convertion1, convertion2, convertion3;` *each used to hold a different integer that will be converted into a string*
+* `string r, g, b;` *Each store strings that were made from the integers*
+* `string code;` *stores the combination of r, g, and b string values and formatted for svg*
 
 ### Console Input and Output
 * `numOfColors` was assigned the number the user entered in `cin >> numOfCOlors`
@@ -68,6 +81,7 @@ Enter a name for the palette file:
 * `if(position == -1)` was used to verify if within the string `fileN` there
 was not an instance of ".txt". If there was not then it would be added by the program and assign fileN to paletteFile. 
 `else` it would simply assign fileN to paletteFile, because it found an instance of ".txt" within the string.
+* `if(count == 9)` was used to restart (`count = 0;`) or add to (`ycolumn ++;`) an integer that dictates the position of the next palette color.
 
 ### Iteration
 
@@ -95,11 +109,17 @@ The file was opened with `dataFile.open(paletteFile,ios::out);` creating a new f
 
 ### Arrays/Vectors
 
-*Coming in version 0.2*
+* `vector<int> rgbCodeValues;` This vector is used to store integers that come from the random number generator. Since the number of integers created correlates to the amount of colors the user needs. A vector was used since it can shrink or expand the storage based on the needs at that very moment.
+* `vector<string> svgColorCode;` This vector is used to store the RGB color code used in a svg file.A vector was used to ensure that there is enough space for the strings.
 
 ### Functions
 
-*Coming in version 0.2*
+* `void createSVG(int neededColors, string title, 
+     vector<string>);` This function uses three parameters to open a svg file and create an image filled with one of the random colors created for the user's color palette. Here the values are not being changed and are an example of pass by value since it is a copy of the actual parameter's value being passed in.
+
+* `void randomGeneratedValues(vector<int>&, int neededColors);` This function uses two parameters to determine the amount of values the randomizer needs to generate. Then storing that information into the vector with the use of `.push_back`. Here the value in the integer was a copy of the actual parameter(pass by value). While the `vector<int>&` when called modifies the value of the of the argument(pass by reference).
+
+* `void rgbForSvg(vector<int>, vector<string>&);` This function uses two parameters to create a string. That string incorporates the generated numbers into a rgb color code in the proper svg format. Here the values for the `vector<int>` are a pass by value since nothing was altered and only copied so that the code can be made with the given information. `vector<string>&`  on the otherhand modifies the value with the string that resulted in the end of the function.
 
 ### Classes
 
