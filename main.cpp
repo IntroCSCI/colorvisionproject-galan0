@@ -8,7 +8,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sstream>
+
 using namespace std;
+
+void createSVG(int color, string file, vector<string> g);
 
 int main()
 {
@@ -84,15 +87,31 @@ int main()
     countforgen ++;
   }
 
-    int x = 50;
+  createSVG(numOfColors, paletteFile, colorCode);
+
+    
+ }
+
+else{
+  cout << "Minimum of 2 was not met. Please try again" << endl;
+}
+ 
+return 0;
+}
+
+//Function Definitons:
+
+//Specified instructions for the layout for the pallete
+void createSVG(int color, string file, vector<string> g){
+  int x = 50;
     int y = 50;
     int width = 100;
     int height = 100;
-    int num = numOfColors;
+    int num = color;
     int count = 0;
     int ycolumn = 0;
 
-    ofstream newFile(paletteFile);
+    ofstream newFile(file);
     if(newFile.is_open()){
     newFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>"<< endl;
     newFile << "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"1000\" width=\"1000\">" << endl;
@@ -117,29 +136,11 @@ int main()
     newFile <<"height=\"" << height << "\" ";
     newFile <<"stroke=\"black\" stroke-width=\"4\" ";
     newFile <<"fill=\""; 
-    newFile << colorCode[i];
+    newFile << g[i];
     newFile <<"\" />" << endl;
     count++;
     }
     newFile << "</svg>";
 
-  /*//Attempting to open the file with the given name
-  ofstream dataFile;
-  dataFile.open(paletteFile, ios:: out);   
-
-  //Entering information into the file
-  dataFile << "Number of distint color values: "
-  << numOfColors << endl;
-
-  dataFile.close();*/
-
-
 }
- }
-
-else{
-  cout << "Minimum of 2 was not met. Please try again" << endl;
-}
- 
-return 0;
 }
