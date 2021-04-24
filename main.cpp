@@ -11,9 +11,12 @@
 
 using namespace std;
 
-void createSVG(int color, string file, vector<string> g);
+void createSVG(int neededColors, string title, 
+     vector<string>);
 
-void colorCode(vector<int>&, int it);
+//Pass by Refernce
+void colorCode(vector<int>&, int neededColors);
+//Pass by Value and Refernce
 void sequence(vector<int>, vector<string>&);
 
 int main()
@@ -44,10 +47,10 @@ int main()
    cin.ignore();
    getline(cin, fileN);
 
-  //Locating .txt in the name of file entered
+  //Locating .svg in the name of file entered
   position = fileN.find(".svg");
 
-  //No instance will result in .txt being added
+  //No instance will result in .svg being added
   if(position == -1){
     paletteFile = fileN + ".svg";
   }
@@ -57,13 +60,14 @@ int main()
 
   cout << "\"" << paletteFile << "\"" << " was created successfully." << endl;
 
-   vector<int> myVector;
-   vector<string> vector2;
+  vector<int> rgbCodeValues;
+  vector<string> svgColorCode;
 
-   colorCode(myVector, numOfColors);
-   sequence(myVector, vector2);
+  //Call to Functions
+  colorCode(rgbCodeValues, numOfColors);
+  sequence(rgbCodeValues, svgColorCode);
 
-  createSVG(numOfColors, paletteFile, vector2);
+  createSVG(numOfColors, paletteFile, svgColorCode);
 
     
  }
@@ -77,29 +81,32 @@ return 0;
 
 //Function Definitons:
 
+//FUNCTION #1
 //Specified instructions for the layout for the pallete
-void createSVG(int color, string file, vector<string> g){
-  int x = 50;
+void createSVG(int neededColors, string title, 
+vector<string> svgCodeFormat){
+    int x = 50;
     int y = 50;
     int width = 100;
     int height = 100;
-    int num = color;
+    int distinctColors = neededColors;
     int count = 0;
     int ycolumn = 0;
 
-    ofstream newFile(file);
-    if(newFile.is_open()){
+  ofstream newFile(title);
+  if(newFile.is_open()){
     newFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>"<< endl;
     newFile << "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"1000\" width=\"1000\">" << endl;
 
     newFile << "<text x =\"390\" y= \"25\">";
-    newFile << "Number of distint color values: ";
-    newFile << num;
+    newFile << "Number of distinct color values: ";
+    newFile << distinctColors;
     newFile << "</text>";
 
-    for(int i =0; i < num; i++){
+  for(int i =0; i < distinctColors; i++){
     newFile <<"<rect ";
 
+    /*Once count equals 9 it will begin printing the color palette on the next line*/
     if(count == 9){
       count = 0;
       ycolumn ++;
@@ -112,47 +119,60 @@ void createSVG(int color, string file, vector<string> g){
     newFile <<"height=\"" << height << "\" ";
     newFile <<"stroke=\"black\" stroke-width=\"4\" ";
     newFile <<"fill=\""; 
-    newFile << g[i];
+    newFile << svgCodeFormat[i];
     newFile <<"\" />" << endl;
     count++;
     }
     newFile << "</svg>";
 
-}
-}
-
-void colorCode(vector<int>& h, int it){
-  int there = it;
-  int generatedNum;
-
-  srand(time(0));
-  for(int i = 0; i < 3 * there; i++){
-    generatedNum = (rand()%256) + 1;
-    h.push_back(generatedNum);
   }
 }
 
-void sequence(vector<int> h, vector<string>& m){
-int countforgen = 0;
 
-  for(int i=0; i < h.size(); i++){
-    int value1 = h[0 + (3 * countforgen)];
-    int value2 = h[1+ (3 * countforgen)];
-    int value3 = h[2+ (3 * countforgen)];
+//FUNCTION #2
+//Random Generator creates the three values for the RGB code
+void colorCode(vector<int>& storeValues, int neededColors){
+  int randomNumber;
 
-    stringstream rgb1, rgb2, rgb3;
-    string all, a, b, c;
+  /*Creates 3 random numbers from 0-255 for each color 
+  needed*/
+  srand(time(0));
+  for(int i = 0; i < 3 * neededColors; i++){
+    randomNumber = rand()%256;
+    storeValues.push_back(randomNumber);
+  }
+}
 
-    rgb1 << value3;
-    rgb1 >> a;
-    rgb2 << value2;
-    rgb2 >> b;
-    rgb3 << value1;
-    rgb3 >> c;
 
-    all = "rgb(" + a + "," + b + "," + c + ")";
-    m.push_back(all);
-    countforgen ++;
+//FUNCTION #3
+/*Combines the RGB values from the random generator into a 
+single string*/
+void sequence(vector<int> storeValues, vector<string>& 
+     rgbCodes){
+  int count = 0;
+
+  for(int i=0; i < storeValues.size(); i++){
+    int value1 = storeValues[0 + (3 * count)];
+    int value2 = storeValues[1 + (3 * count)];
+    int value3 = storeValues[2 + (3 * count)];
+
+    //converts the integers into string
+    stringstream convertion1, convertion2, convertion3;
+    string code, r, g, b;
+
+    convertion1 << value3;
+    convertion1 >> r;
+    convertion2 << value2;
+    convertion2 >> g;
+    convertion3 << value1;
+    convertion3 >> b;
+
+    /*Template that is the correct way of using an RGB code 
+    for an SVG file*/
+    code = "rgb(" + r + "," + g + "," + b + ")";
+    
+    rgbCodes.push_back(code);
+    count ++;
   }
 
 }
