@@ -13,6 +13,9 @@ using namespace std;
 
 void createSVG(int color, string file, vector<string> g);
 
+void colorCode(vector<int>&, int it);
+void sequence(vector<int>, vector<string>&);
+
 int main()
 {
  //Variables
@@ -54,40 +57,13 @@ int main()
 
   cout << "\"" << paletteFile << "\"" << " was created successfully." << endl;
 
-  //RGB colorcodes
-  int numColor = numOfColors;
-  int generatedNum;
-  int countforgen = 0;
-  vector <int> generatedNumHolder;
-  vector <string> colorCode;
+   vector<int> myVector;
+   vector<string> vector2;
 
-  srand(time(0));
-  for(int i = 0; i < 3 * numColor; i++){
-    generatedNum = (rand()%256) + 1;
-    generatedNumHolder.push_back(generatedNum);
-  }
+   colorCode(myVector, numOfColors);
+   sequence(myVector, vector2);
 
-  for(int i = 0; i < numColor; i++){
-    int value1 = generatedNumHolder[0 + (3 * countforgen)];
-    int value2 = generatedNumHolder[1+ (3 * countforgen)];
-    int value3 = generatedNumHolder[2+ (3 * countforgen)];
-
-    stringstream rgb1, rgb2, rgb3;
-    string all, a, b, c;
-
-    rgb1 << value3;
-    rgb1 >> a;
-    rgb2 << value2;
-    rgb2 >> b;
-    rgb3 << value1;
-    rgb3 >> c;
-
-    all = "rgb(" + a + "," + b + "," + c + ")";
-    colorCode.push_back(all);
-    countforgen ++;
-  }
-
-  createSVG(numOfColors, paletteFile, colorCode);
+  createSVG(numOfColors, paletteFile, vector2);
 
     
  }
@@ -143,4 +119,40 @@ void createSVG(int color, string file, vector<string> g){
     newFile << "</svg>";
 
 }
+}
+
+void colorCode(vector<int>& h, int it){
+  int there = it;
+  int generatedNum;
+
+  srand(time(0));
+  for(int i = 0; i < 3 * there; i++){
+    generatedNum = (rand()%256) + 1;
+    h.push_back(generatedNum);
+  }
+}
+
+void sequence(vector<int> h, vector<string>& m){
+int countforgen = 0;
+
+  for(int i=0; i < h.size(); i++){
+    int value1 = h[0 + (3 * countforgen)];
+    int value2 = h[1+ (3 * countforgen)];
+    int value3 = h[2+ (3 * countforgen)];
+
+    stringstream rgb1, rgb2, rgb3;
+    string all, a, b, c;
+
+    rgb1 << value3;
+    rgb1 >> a;
+    rgb2 << value2;
+    rgb2 >> b;
+    rgb3 << value1;
+    rgb3 >> c;
+
+    all = "rgb(" + a + "," + b + "," + c + ")";
+    m.push_back(all);
+    countforgen ++;
+  }
+
 }
