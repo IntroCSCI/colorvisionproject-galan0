@@ -39,11 +39,11 @@ int main()
    getline(cin, fileN);
 
   //Locating .txt in the name of file entered
-  position = fileN.find(".txt");
+  position = fileN.find(".svg");
 
   //No instance will result in .txt being added
   if(position == -1){
-    paletteFile = fileN + ".txt";
+    paletteFile = fileN + ".svg";
   }
   else{
     paletteFile = fileN;
@@ -54,12 +54,9 @@ int main()
   //RGB colorcodes
   int numColor = numOfColors;
   int generatedNum;
-  int count = 0;
+  int countforgen = 0;
   vector <int> generatedNumHolder;
   vector <string> colorCode;
-
-  cout << "num of color (2+)" << endl;
-  cin >> numColor;
 
   srand(time(0));
   for(int i = 0; i < 3 * numColor; i++){
@@ -68,9 +65,9 @@ int main()
   }
 
   for(int i = 0; i < numColor; i++){
-    int value1 = generatedNumHolder[0 + (3 * count)];
-    int value2 = generatedNumHolder[1+ (3 * count)];
-    int value3 = generatedNumHolder[2+ (3 * count)];
+    int value1 = generatedNumHolder[0 + (3 * countforgen)];
+    int value2 = generatedNumHolder[1+ (3 * countforgen)];
+    int value3 = generatedNumHolder[2+ (3 * countforgen)];
 
     stringstream rgb1, rgb2, rgb3;
     string all, a, b, c;
@@ -84,8 +81,47 @@ int main()
 
     all = "rgb(" + a + "," + b + "," + c + ")";
     colorCode.push_back(all);
-    count ++;
+    countforgen ++;
   }
+
+    int x = 50;
+    int y = 50;
+    int width = 100;
+    int height = 100;
+    int num = numOfColors;
+    int count = 0;
+    int ycolumn = 0;
+
+    ofstream newFile(paletteFile);
+    if(newFile.is_open()){
+    newFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>"<< endl;
+    newFile << "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"1000\" width=\"1000\">" << endl;
+
+    newFile << "<text x =\"390\" y= \"25\">";
+    newFile << "Number of distint color values: ";
+    newFile << num;
+    newFile << "</text>";
+
+    for(int i =0; i < num; i++){
+    newFile <<"<rect ";
+
+    if(count == 9){
+      count = 0;
+      ycolumn ++;
+    }
+
+    newFile <<"x=\"" << x + 100 * count << "\" ";
+    newFile <<"y=\"" << y + 100 * ycolumn << "\" ";
+
+    newFile <<"width=\"" << width << "\" ";
+    newFile <<"height=\"" << height << "\" ";
+    newFile <<"stroke=\"black\" stroke-width=\"4\" ";
+    newFile <<"fill=\""; 
+    newFile << colorCode[i];
+    newFile <<"\" />" << endl;
+    count++;
+    }
+    newFile << "</svg>";
 
   /*//Attempting to open the file with the given name
   ofstream dataFile;
@@ -99,6 +135,7 @@ int main()
 
 
 }
+ }
 
 else{
   cout << "Minimum of 2 was not met. Please try again" << endl;
