@@ -124,13 +124,27 @@ vector<string> svgCodeFormat){
 //Random Generator creates the three values for the RGB code
 void randomGeneratedValues(vector<int>& storeValues, int neededColors){
   int randomNumber;
+  int count = 0;
 
   /*Creates 3 random numbers from 0-255 for each color 
   needed*/
   srand(time(0));
   for(int i = 0; i < 3 * neededColors; i++){
     randomNumber = rand()%256;
+
+    //An attempt to cause wider variety by altering R value to avoid similar tones and problematic combinations
+    
+    if(count == 3 && randomNumber > 66){
+      randomNumber = randomNumber - 100;
+    }
+
+    if(count == 6){
+      count = 0;
+      randomNumber = randomNumber + 100;
+    }
+
     storeValues.push_back(randomNumber);
+    count++;
   }
 }
 

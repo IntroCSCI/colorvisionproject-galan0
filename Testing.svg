@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" height="1000" width="1000">
-<text x ="390" y= "25">Number of distinct color values: 5</text><rect x="50" y="50" width="100" height="100" stroke="black" stroke-width="4" fill="rgb(113,104,164)" />
-<rect x="150" y="50" width="100" height="100" stroke="black" stroke-width="4" fill="rgb(125,91,173)" />
-<rect x="250" y="50" width="100" height="100" stroke="black" stroke-width="4" fill="rgb(183,88,129)" />
-<rect x="350" y="50" width="100" height="100" stroke="black" stroke-width="4" fill="rgb(165,145,48)" />
-<rect x="450" y="50" width="100" height="100" stroke="black" stroke-width="4" fill="rgb(219,122,124)" />
-</svg>
