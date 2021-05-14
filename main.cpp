@@ -1,13 +1,13 @@
 //Adonay Galan
 
 #include <iostream>
-#include <iostream>
 #include <fstream>
 #include <vector>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <sstream>
+#include "palette.h"
 
 using namespace std;
 
@@ -25,6 +25,7 @@ int main()
  int numOfColors;
  string paletteFile, fileN;
  size_t position;
+ palette color;
 
 //Ask for amount of Colors
  cout << "Enter the amount of colors needed (2+): " << endl;
@@ -47,18 +48,9 @@ int main()
    cin.ignore();
    getline(cin, fileN);
 
-  //Locating .svg in the name of file entered
-  position = fileN.find(".svg");
+  color.setFileSvg(fileN);
 
-  //No instance will result in .svg being added
-  if(position == -1){
-    paletteFile = fileN + ".svg";
-  }
-  else{
-    paletteFile = fileN;
-  }
-
-  cout << "\"" << paletteFile << "\"" << " was created successfully." << endl;
+  cout << "\"" << color.getFileSvg() << "\"" << " was created successfully." << endl;
 
   vector<int> rgbCodeValues;
   vector<string> svgColorCode;
@@ -67,7 +59,7 @@ int main()
   randomGeneratedValues(rgbCodeValues, numOfColors);
   rgbForSvg(rgbCodeValues, svgColorCode);
 
-  createSVG(numOfColors, paletteFile, svgColorCode);
+  createSVG(numOfColors, color.getFileSvg(), svgColorCode);
 
     
  }
