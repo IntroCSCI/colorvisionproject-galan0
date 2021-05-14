@@ -5,12 +5,13 @@
 using std::string;
 using std::vector;
 
-void palette::setFileSvg(string x){
-  NewFileSvg = x;
+
+void palette::setFileSvg(string userFileName){
+  newFileSvg = userFileName;
 }
 
 string palette::getFileSvg(){
-  string validFile = NewFileSvg;
+  string validFile = newFileSvg;
   string paletteFile;
   size_t position;
 
@@ -25,7 +26,7 @@ string palette::getFileSvg(){
     paletteFile = validFile;
   } 
 
-  NewFileSvg = paletteFile;
+  newFileSvg = paletteFile;
 
-  return NewFileSvg;
+  return newFileSvg;
 }

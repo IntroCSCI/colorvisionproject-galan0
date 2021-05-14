@@ -14,7 +14,7 @@ The user will be able to see the amount of colors they chose. As well as, the co
 
 ### v1.0 Updates
 
-*Coming soon*
+This version of the program creates a color palette with the least amount of problematic color combinations.
 
 
 ## Developer
@@ -59,7 +59,7 @@ myColors
 * `int randomNumber;` *stores number from the random generator* 
 * `stringstream convertion1, convertion2, convertion3;` *each used to hold a different integer that will be converted into a string*
 * `string r, g, b;` *Each store strings that were made from the integers*
-* `string code;` *stores the combination of r, g, and b string values and formatted for svg*
+* `string code;` *stores the combination of r, g, and b string values and formatted for svg* 
 
 ### Console Input and Output
 * `numOfColors` was assigned the number the user entered in `cin >> numOfCOlors`
@@ -121,6 +121,10 @@ The file was opened with `dataFile.open(paletteFile,ios::out);` creating a new f
 
 * `void rgbForSvg(vector<int>, vector<string>&);` This function uses two parameters to create a string. That string incorporates the generated numbers into a rgb color code in the proper svg format. Here the values for the `vector<int>` are a pass by value since nothing was altered and only copied so that the code can be made with the given information. `vector<string>&`  on the otherhand modifies the value with the string that resulted in the end of the function.
 
+* `void setFileSvg(string userFileName);` This function uses one parameter to modify the value of class private `string newFileSvg`. Here the values for the `string userFileName` are a pass by value since the actual value was not modied.
+
+* `string getFileSvg();` This function uses the data member `string userFileName` to search and for an instance of ".svg". If no instance is loacted within the string it is added and then reassigned to the class private. 
+
 ### Classes
 
-*Coming in version 1.0*
+* `class palette` It contains one data member: `string newFileName`; and two function members: `void setFileSvg(string userFileName)` and `string getFileSvg();`. The date member is unable to be accessed from outside the class and is only reused by the functions located within class. There is a single instance of the class in the main program where it is used to open and create a usable svg file.

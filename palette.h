@@ -9,10 +9,10 @@ using std::vector;
 class palette
 {
   private: 
-    string NewFileSvg;
+    string newFileSvg;
   
   public: 
-    void setFileSvg(string x);
+    void setFileSvg(string userFileName);
     string getFileSvg();
 
 };

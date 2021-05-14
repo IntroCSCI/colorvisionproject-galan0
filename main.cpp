@@ -23,9 +23,8 @@ int main()
 {
  //Variables
  int numOfColors;
- string paletteFile, fileN;
- size_t position;
- palette color;
+ string fileN;
+ palette colorFileName;
 
 //Ask for amount of Colors
  cout << "Enter the amount of colors needed (2+): " << endl;
@@ -48,9 +47,9 @@ int main()
    cin.ignore();
    getline(cin, fileN);
 
-  color.setFileSvg(fileN);
+  colorFileName.setFileSvg(fileN);
 
-  cout << "\"" << color.getFileSvg() << "\"" << " was created successfully." << endl;
+  cout << "\"" << colorFileName.getFileSvg() << "\"" << " was created successfully." << endl;
 
   vector<int> rgbCodeValues;
   vector<string> svgColorCode;
@@ -59,7 +58,7 @@ int main()
   randomGeneratedValues(rgbCodeValues, numOfColors);
   rgbForSvg(rgbCodeValues, svgColorCode);
 
-  createSVG(numOfColors, color.getFileSvg(), svgColorCode);
+  createSVG(numOfColors, colorFileName.getFileSvg(), svgColorCode);
 
     
  }
