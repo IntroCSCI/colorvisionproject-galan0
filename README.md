@@ -16,7 +16,7 @@ The user will be able to see the amount of colors they chose. As well as, the co
 
 In this update of the program previous features are present. However, this version makes a conscious effort to creates a color palette with the least amount of problematic color combinations.
 
-It does so by modifying the R value in every RGB code so to avoid close or similar color values.
+It does so by modifying the R value in every RGB code so to avoid close or similar color value.
 
 
 ## Developer
