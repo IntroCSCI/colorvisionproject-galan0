@@ -47,7 +47,7 @@ myColors
 ### Variables and Data Types
 
 * `int numOfColors;` *stores the number the user enters*
-* `size_t position;` 
+* `size_t position;` *stores a position*
 * `string fileN;` *stores the name of the file given by the user*
 * `string paletteFile;` *stores the complete file name*
 * `ofstream newFile(title);;` *used to create svg file and store colors*
@@ -81,8 +81,8 @@ Enter a name for the palette file:
 ```
 *  There was another precaution set after the do while loop to verify and decide if the number met the requirments with `if(numOfColors >= 2)`
 * `if(position == -1)` was used to verify if within the string `fileN` there
-was not an instance of ".txt". If there was not then it would be added by the program and assign fileN to paletteFile. 
-`else` it would simply assign fileN to paletteFile, because it found an instance of ".txt" within the string.
+was not an instance of ".svg". If there was not then it would be added by the program and assign fileN to paletteFile. 
+`else` it would simply assign fileN to paletteFile, because it found an instance of ".svg" within the string.
 * `if(count == 9)` was used to restart (`count = 0;`) or add to (`ycolumn ++;`) an integer that dictates the position of the next palette color.
 
 ### Iteration
